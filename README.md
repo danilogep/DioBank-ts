@@ -1,54 +1,84 @@
-# Desenvolvendo o Dio Bank
-desenvolvido por [Nathally Souza](https://github.com/nathyts) e atualizado por [Danilo Evangelista](https://github.com/danilogep)
+# 🏦 DioBank - TypeScript
 
-#### Projeto desenvolvido com conceitos básicos de typescript
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Concluído-success?style=for-the-badge)
 
-### Tecnologias
-- Typescript
+> Projeto de um sistema bancário simples desenvolvido com **TypeScript**, focado na aplicação de conceitos de Programação Orientada a Objetos (POO). Refatorado para atender a padrões de Clean Code e Encapsulamento.
 
-### Como rodar o projeto
+---
 
-1 - Clone o repositório
+## 📋 Sobre o Projeto
 
-2 - Instale as dependências
-    
-    npm install
+Este projeto foi desenvolvido originalmente como parte de um desafio da **DIO (Digital Innovation One)** e passou por uma **Auditoria de Código (Code Review)** completa. O objetivo principal foi transformar um código base simples em uma arquitetura robusta e segura.
 
-3 - Execute o projeto (Testes End-to-End)
+### 🚀 Tecnologias Utilizadas
+* **Linguagem:** TypeScript
+* **Runtime:** Node.js
+* **Dependências:** `ts-node-dev` (Ambiente de desenvolvimento)
 
-    npm run dev
+---
 
-### Resumo das Implementações (Code Review)
+## ⚙️ Funcionalidades & Arquitetura
 
-O projeto foi refatorado para atender aos princípios de **Encapsulamento** e **Programação Orientada a Objetos**, garantindo segurança e escalabilidade:
+O sistema simula operações bancárias com diferentes tipos de contas, aplicando regras de negócio rígidas através de POO.
 
-1.  **Encapsulamento Rígido:** Atributos sensíveis (`balance`, `status`, `doc_id`) agora são `private`.
-2.  **Herança Segura:** Criação de métodos `protected` (`validarStatus`, `alterarSaldo`) na classe mãe para permitir que as classes filhas manipulem o estado sem expor os dados publicamente.
-3.  **Imutabilidade:** Remoção de setters inseguros (`setName`), garantindo que dados cadastrais não sejam alterados após a criação.
+### 🔒 Encapsulamento & Segurança
+* **Atributos Privados:** Todos os dados sensíveis (`saldo`, `documento`) são inacessíveis externamente.
+* **Imutabilidade:** Nomes e números de conta não podem ser alterados após a criação.
+* **Métodos Protegidos:** Uso de `protected` para permitir que subclasses manipulem o saldo de forma controlada sem expor a variável.
 
-#### Desafios Concluídos
-[x] Implementar os métodos de depósito (deposit) e saque (withdraw) na classe DioAccount
-  - Validação: Saques só ocorrem se houver saldo suficiente (`balance >= value`) e status ativo.
+### 🛠️ Tipos de Contas Implementados
 
-[x] Implementar o método de empréstimo (getLoan) na classe CompanyAccount
-  - Funcionalidade: Acresce o valor ao saldo respeitando o encapsulamento da classe mãe.
+| Tipo de Conta | Descrição | Regras de Negócio |
+| :--- | :--- | :--- |
+| **PeopleAccount** | Conta Pessoa Física | Depósitos e Saques padrão com validação de saldo. |
+| **CompanyAccount** | Conta Jurídica | Possui método exclusivo `getLoan` (Empréstimo). |
+| **BonusAccount** | Conta Especial | Todo depósito recebe um bônus automático de **+10**. |
 
-[x] Criar um novo tipo de conta a partir da DioAccount
-  - **BonusAccount**: Implementada. Ao depositar, o saldo recebe o valor original + 10 de bônus.
+---
 
-[x] Todos os atributos de qualquer conta devem ser privados
-  - Refatorado: `balance`, `name`, `accountNumber`, `doc_id` e `status` agora são privados/readonly.
+## 📦 Como Executar
 
-[x] Os atributos name e accountNumber não podem ser alterados internamente ou externamente
-  - Segurança: Atributos definidos como `readonly` e métodos de alteração removidos.
+Siga os passos abaixo para rodar o projeto e os testes em sua máquina.
 
-[x] Criar instancias para cada um dos tipos de conta no app.ts e executar os métodos possíveis.
-  - Testes: O arquivo `app.ts` agora executa um roteiro completo de testes para `PeopleAccount`, `CompanyAccount` e `BonusAccount`.
+### 1. Clonar e Instalar
+```bash
+# Clone o repositório
+git clone [https://github.com/danilogep/DioBank-ts.git](https://github.com/danilogep/DioBank-ts.git)
 
-###  3. Explicação das Mudanças:
+# Entre na pasta
+cd DioBank-ts
 
-* **Checklist Atualizado**: Todas as caixas [ ] foram alteradas para [x] para refletir o estado atual do código.
+# Instale as dependências
+npm install
+```
 
-* **Seção "Resumo das Implementações"**: Adicionada para fornecer contexto técnico sobre como os desafios foram resolvidos (ex: explicação sobre os métodos protected).
+### 2. Rodar Testes (Script)
+O projeto possui um script de testes no arquivo `app.ts` que valida todos os cenários (sucesso e erro).
 
-* **Instruções de Execução**: Clarificado que npm run dev agora roda os testes implementados no app.ts.
+```bash
+npm run dev
+```
+
+> **Saída Esperada:** Você verá logs no terminal detalhando depósitos, saques, empréstimos e validações de saldo para cada tipo de conta.
+
+---
+
+## ✅ Checklist do Code Review
+
+Abaixo estão as melhorias e correções aplicadas durante a refatoração sênior:
+
+- [x] **Implementação de Depósito/Saque:** Validação de saldo (`balance >= value`) e status da conta.
+- [x] **Feature de Empréstimo:** Implementado na `CompanyAccount` respeitando o encapsulamento.
+- [x] **Nova Feature:** Criação da `BonusAccount` com polimorfismo no método de depósito.
+- [x] **Refatoração de Segurança:** Todos os atributos convertidos para `private` ou `readonly`.
+- [x] **Testes Automatizados:** Script `app.ts` cobre cenários de sucesso e falha.
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Nathally Souza**, revisado e refatorado por **Danilo Evangelista**.
+
+[![Linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/danilogep/)
